@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         if (Input.GetKeyDown(KeyCode.C) && attackAble)
         {
             attackAble = false;
@@ -54,11 +56,14 @@ public class Player : MonoBehaviour
                     anim.SetBool("Run", true);
                     sr.flipX = true;
                 }
+
+
+
             }
             if (Physics2D.Raycast(transform.position, Vector2.down, 1.7f, isGround) && Input.GetKeyDown(KeyCode.Space))
             {
                 rb.velocity += Vector2.up * jumpForce;
-
+                anim.SetBool("jump", true);
             }
             if (Input.GetButtonUp("Horizontal"))
             {
@@ -70,6 +75,13 @@ public class Player : MonoBehaviour
                 anim.SetBool("Sliding", false);
             }
         }
+        if(rb.velocity.y == 0)
+        {
+            anim.SetBool("jump", false);
+            sr.flipY = false;
+        }
+        
+
     }
 
     IEnumerator AtackTimer()
